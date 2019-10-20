@@ -42,13 +42,13 @@ class App extends Component {
         ]
       }
     ];
-  }
-
-  updateInput(key, value){
-    // update react state (if use of localStorage)
-    this.setState({
-      [key]: value
-    })
+    const dictionaries = localStorage.getItem('dictionaries');
+    if (dictionaries) {
+      const savedDictionaries = JSON.parse(dictionaries);
+      this.setState({ dictionaries: savedDictionaries });
+    } else {
+      console.log('No dictionaries');
+    }
   }
 
   updateDictionary(key, value) {
@@ -58,7 +58,7 @@ class App extends Component {
     })
   }
 
-  addDictionary(){
+  addDictionary = async () => {
     // copy of current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
 
@@ -74,23 +74,36 @@ class App extends Component {
     dictionaries.push(newDictionaryName);
 
     //update state with new dictionaries and reset newDictionaryName input
-    this.setState({
+    await this.setState({
       dictionaries,
       newDictionaryName: ''
     });
+
+    localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
+    console.log(localStorage.getItem('dictionaries'));
   }
 
-  deleteDictionary(id){
+  deleteDictionary = async (id) => {
     // copy current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
 
     // filter out item being deleted
     const updatedDictionaries = dictionaries.filter(dictionary => dictionary.id !== id);
 
-    this.setState({dictionaries: updatedDictionaries});
+    await this.setState({dictionaries: updatedDictionaries});
+
+    localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
+    console.log(localStorage.getItem('dictionaries'));
   }
 
-  addNewRow(dictionary) {
+  updateInput(key, value) {
+    // update react state (if use of localStorage)
+    this.setState({
+      [key]: value
+    })
+  }
+
+  addNewRow = async (dictionary) => {
     // copy of current list of dictionaries
     const content = dictionary.content;
 
@@ -105,15 +118,18 @@ class App extends Component {
     dictionary.content.push(newContent);
 
     //update state with new dictionaries and reset newDictionaryName input
-    this.setState({
+    await this.setState({
       dictionaries: this.state.dictionaries,
       // content,
       newDomain: '',
       newRange: ''
     });
+
+    localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
+    console.log(localStorage.getItem('dictionaries'));
   }
 
-  deleteRow(dictionary, rowId) {
+  deleteRow = async (dictionary, rowId) => {
     // copy current list of dictionaries
     const content = dictionary.content;
     console.log(content);
@@ -123,7 +139,10 @@ class App extends Component {
     // console.log(dictionary);
     dictionary.content = updatedContent;
 
-    this.setState({ dictionaries: this.state.dictionaries});
+    await this.setState({ dictionaries: this.state.dictionaries});
+
+    localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
+    console.log(localStorage.getItem('dictionaries'));
   }
 
   render() {
