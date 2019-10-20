@@ -51,6 +51,13 @@ class App extends Component {
     })
   }
 
+  updateDictionary(key, value) {
+    // update react state (if use of localStorage)
+    this.setState({
+      [key]: value
+    })
+  }
+
   addDictionary(){
     // copy of current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
@@ -126,10 +133,11 @@ class App extends Component {
           <h1>App</h1>
           <p>Create a new dictionary:</p>
           <input
-          type='text'
-          placeholder='Name'
-          value={this.state.newDictionaryName}
-          onChange={e => this.updateInput('newDictionaryName', e.target.value)}
+            type='text'
+            placeholder='Name'
+            name='name'
+            value={this.state.newDictionaryName}
+            onChange={e => this.updateDictionary('newDictionaryName', e.target.value)}
           />
           <button
           onClick={() => this.addDictionary()}
@@ -150,17 +158,19 @@ class App extends Component {
                       x
                     </button>
                   </h3>
-                  <div className='NewEntry'>
+                  <div id={dictionary.id} className='NewEntry'>
                     <p>Add new entry:</p>
                     <input
                       type='text'
                       placeholder='domain'
+                      name={dictionary.name}
                       value={this.state.newDomain}
                       onChange={e => this.updateInput('newDomain', e.target.value)}
                     />
                     <input
                       type='text'
                       placeholder='range'
+                      name={dictionary.name}
                       value={this.state.newRange}
                       onChange={e => this.updateInput('newRange', e.target.value)}
                     />
