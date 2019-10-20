@@ -145,6 +145,22 @@ class App extends Component {
     console.log(localStorage.getItem('dictionaries'));
   }
 
+  editRow = (dictionary, rowId) => {
+    console.log(dictionary.name, 'row' , rowId, 'editable');
+    const selector = `table.${dictionary.name} tbody tr`;
+    const domain = document.querySelectorAll(selector)[rowId - 1].children[0].innerText;
+    const range = document.querySelectorAll(selector)[rowId - 1].children[1].innerText;
+    console.log(domain, range);
+    const selectorInput = `div#${dictionary.name} input`;
+    document.querySelectorAll(selectorInput)[0].value = domain;
+    this.updateInput('newDomain', domain);
+    document.querySelectorAll(selectorInput)[1].value = range;
+    this.updateInput('newRange', range);
+    const selectorButton = `div#${dictionary.name} button`;
+    document.querySelector(selectorButton).innerText = 'edit content';
+    // console.log(domainInput, rangeInput);
+  }
+
   render() {
     return (
       <div className="App">
@@ -177,7 +193,7 @@ class App extends Component {
                       x
                     </button>
                   </h3>
-                  <div id={dictionary.id} className='NewEntry'>
+                  <div id={dictionary.name} className='NewEntry'>
                     <p>Add new entry:</p>
                     <input
                       type='text'
@@ -195,7 +211,7 @@ class App extends Component {
                     />
                     <button onClick={() => this.addNewRow(dictionary)}>add new content</button>
                   </div>
-                  <table>
+                  <table className={dictionary.name}>
                     <thead>
                       <tr>
                         <th>Domain</th>
@@ -205,7 +221,7 @@ class App extends Component {
                     <tbody>
                       {dictionary.content.map(row => {
                         return (
-                          <tr key={row.id}>
+                          <tr key={row.id} id={row.id}>
                             <td>{row.domain}</td>
                             <td>{row.range}</td>
                             <td>
@@ -213,6 +229,13 @@ class App extends Component {
                                 onClick={() => this.deleteRow(dictionary, row.id)}
                               >
                                 x
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                onClick={() => this.editRow(dictionary, row.id)}
+                              >
+                                edit
                               </button>
                             </td>
                           </tr>
