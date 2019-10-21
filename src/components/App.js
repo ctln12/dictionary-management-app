@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateNewDictionary from './CreateNewDictionary';
 
 class App extends Component {
   constructor(props) {
@@ -81,20 +82,20 @@ class App extends Component {
     })
   }
 
-  addDictionary = async () => {
+  addDictionary = async (newDictionaryName) => {
     // copy of current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
 
     // create item with unique id
-    const newDictionaryName = {
+    const newDictionary = {
       // id: 1 + dictionaries.length,
       id: this.setUniqueId(),
-      name: this.state.newDictionaryName.slice(),
+      name: newDictionaryName.slice(),
       content: []
     };
 
     //add new item to dictionaries
-    dictionaries.push(newDictionaryName);
+    dictionaries.push(newDictionary);
 
     //update state with new dictionaries and reset newDictionaryName input
     await this.setState({
@@ -214,22 +215,11 @@ class App extends Component {
       <div className="App">
         <div>
           <h1>App</h1>
-          <div className='Create-new-dictionary'>
-            <p>Create a new dictionary:</p>
-            <input
-              type='text'
-              placeholder='Name'
-              name='name'
-              value={this.state.newDictionaryName}
-              onChange={e => this.updateDictionary('newDictionaryName', e.target.value)}
-            />
-            <button
-            onClick={() => this.addDictionary()}
-            >
-              add
-            </button>
-            <hr/>
-          </div>
+          <CreateNewDictionary
+            newDictionaryName={this.state.newDictionaryName}
+            dictionaries={this.state.dictionaries}
+            addDictionaryFn={this.addDictionary}
+          />
           <div className='Dictionaries'>
             <h2>Dictionaries</h2>
             {this.state.dictionaries.map(dictionary => {
