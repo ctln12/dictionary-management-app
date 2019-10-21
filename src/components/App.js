@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CreateNewDictionary from './CreateNewDictionary';
 import Dictionaries from './Dictionaries';
-import '../App.css';
+import '../style/App.css';
 
 class App extends Component {
   constructor(props) {
