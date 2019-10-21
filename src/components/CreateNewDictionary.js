@@ -18,8 +18,6 @@ class CreateNewDictionary extends Component {
   }
 
   render() {
-    const { dictionaries } = this.props;
-
     return (
       <div className='Create-new-dictionary'>
         <p>Create a new dictionary:</p>

@@ -217,7 +217,6 @@ class App extends Component {
           <h1>App</h1>
           <CreateNewDictionary
             newDictionaryName={this.state.newDictionaryName}
-            dictionaries={this.state.dictionaries}
             addDictionaryFn={this.addDictionary}
           />
           <div className='Dictionaries'>
