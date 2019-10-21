@@ -9,6 +9,7 @@ class App extends Component {
       newDomain: '',
       newRange: '',
       dictionaries: [],
+      idCounter: []
     }
   }
 
@@ -43,7 +44,14 @@ class App extends Component {
         ]
       }
     ];
-    this.setState({ dictionaries: data });
+    const idCounter = [];
+    for (let index = 3; index < 104; index++) {
+       idCounter.push(index);
+    }
+    this.setState({
+      dictionaries: data,
+      idCounter: idCounter
+    });
     console.log('Add data to state');
   }
 
@@ -59,6 +67,13 @@ class App extends Component {
     }
   }
 
+  setUniqueId = () => {
+    const newId = this.state.idCounter.shift();
+    const newIdCounter = this.state.idCounter.slice(0);
+    this.setState({idCounter: newIdCounter});
+    return newId;
+  };
+
   updateDictionary(key, value) {
     // update react state (if use of localStorage)
     this.setState({
@@ -72,7 +87,8 @@ class App extends Component {
 
     // create item with unique id
     const newDictionaryName = {
-      id: 1 + dictionaries.length,
+      // id: 1 + dictionaries.length,
+      id: this.setUniqueId(),
       name: this.state.newDictionaryName.slice(),
       content: []
     };
@@ -142,7 +158,7 @@ class App extends Component {
 
     // create item with unique id
     const newRow = {
-      id: 1 + content.length,
+      id: this.setUniqueId(),
       domain: this.state.newDomain.slice(),
       range: this.state.newRange.slice()
     };
