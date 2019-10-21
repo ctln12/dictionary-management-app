@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 class Row extends Component {
   deleteRow = (e) => {
     this.props.deleteRowFn(this.props.dictionary, parseInt(e.target.id));
-    console.log('deleted');
   }
 
   editRow = (e) => {
     this.props.editRowFn(this.props.dictionary, parseInt(e.target.id));
-    console.log('edited');
   }
 
   render() {

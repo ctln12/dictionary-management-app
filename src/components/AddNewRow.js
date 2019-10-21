@@ -39,10 +39,10 @@ class AddNewRow extends Component {
   addNewRow = (e) => {
     this.props.addNewRowFn(this.props.dictionary, this.state.newDomain, this.state.newRange);
 
-    // this.setState({
-    //   newDomain: '',
-    //   newRange: ''
-    // });
+    this.setState({
+      newDomain: '',
+      newRange: ''
+    });
   }
 
   render() {

@@ -83,7 +83,7 @@ class App extends Component {
     })
   }
 
-  addDictionary = async (newDictionaryName) => {
+  addDictionary = (newDictionaryName) => {
     // copy of current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
 
@@ -99,7 +99,7 @@ class App extends Component {
     dictionaries.push(newDictionary);
 
     //update state with new dictionaries and reset newDictionaryName input
-    await this.setState({
+    this.setState({
       dictionaries,
       newDictionaryName: ''
     });
@@ -108,51 +108,18 @@ class App extends Component {
     console.log(localStorage.getItem('dictionaries'));
   }
 
-  deleteDictionary = async (id) => {
+  deleteDictionary = (id) => {
     // copy current list of dictionaries
     const dictionaries = [...this.state.dictionaries];
 
     // filter out item being deleted
     const updatedDictionaries = dictionaries.filter(dictionary => dictionary.id !== id);
 
-    await this.setState({dictionaries: updatedDictionaries});
+    this.setState({dictionaries: updatedDictionaries});
 
     localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
     console.log(localStorage.getItem('dictionaries'));
   }
-
-  // updateInput(key, value, name) {
-  //   // update react state (if use of localStorage)
-  //   this.setState({
-  //     [key]: value
-  //   })
-
-  //   const dictionaries = this.state.dictionaries;
-  //   dictionaries.forEach(dictionary => {
-  //     if (dictionary.name === name) {
-  //       dictionary.content.forEach(row => {
-  //         if (key === 'newDomain') {
-  //           if (value === row.domain) {
-  //             if (value !== row.range) {
-  //               alert('Duplicate / Fork!');
-  //               value = '';
-  //             }
-  //           }
-  //         } else {
-  //           if (key === 'newRange') {
-  //             if (!row.range.includes(value)) {
-  //               if (this.state.newDomain === row.range) {
-  //                 alert('Cycle / Chain!');
-  //                 value = '';
-  //               }
-  //             }
-  //           }
-  //         }
-  //         }
-  //       );
-  //     }
-  //   });
-  // }
 
   addNewRow = (dictionary, newDomain, newRange) => {
     // copy of current list of dictionaries
@@ -208,14 +175,13 @@ class App extends Component {
     this.updateInput('newRange', range);
     const selectorButton = `div#${dictionary.name} button`;
     document.querySelector(selectorButton).innerText = 'edit content';
-    // console.log(domainInput, rangeInput);
   }
 
   render() {
     return (
       <div className="App">
         <div>
-          <h1>App</h1>
+          <h1>Dictionary Management Application</h1>
           <CreateNewDictionary
             newDictionaryName={this.state.newDictionaryName}
             addDictionaryFn={this.addDictionary}
