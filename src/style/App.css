@@ -1,0 +1,95 @@
+.App {
+  margin: auto 10% 10% 10%;
+}
+
+.App h1 {
+  text-align: center;
+}
+
+.Create-new-dictionary {
+  text-align: center;
+}
+
+.Create-new-dictionary input {
+  height: 20px;
+  width: 150px;
+  margin: 0;
+  padding: 5px 5px 5px 10px;
+  border-radius: 10px 0px 0px 10px;
+  border: 1px solid black;
+}
+
+.Create-new-dictionary button {
+  height: 32px;
+  width: 40px;
+  margin: 0;
+  margin-bottom: 20px;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid black;
+  border-left: 0px white;
+  background-color: aliceblue;
+  font-weight: bold;
+}
+
+hr {
+  width: 540px;
+}
+
+.Dictionary button {
+  border: none;
+}
+
+.Dictionaries {
+  margin: auto;
+  text-align: center;
+}
+
+.NewEntry input {
+  height: 20px;
+  width: 150px;
+  margin: 20px 0 20px 0;
+  padding: 5px 5px 5px 10px;
+  border: 1px solid black;
+}
+
+.NewEntry input:nth-child(1) {
+  border-radius: 10px 0px 0px 10px;
+  border-right: 0px white;
+}
+
+.NewEntry button {
+  height: 32px;
+  width: 40px;
+  margin: 20px 0 20px 0;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid black;
+  border-left: 0px white;
+  background-color: aliceblue;
+  font-weight: bold;
+}
+
+.DictionaryContent table {
+  width: 550px;
+  height: 150px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: aliceblue;
+}
+
+tr, th, td {
+  padding: 10px;
+}
+
+tr {
+  border-bottom: 1px solid lightgray;
+}
+
+th, td {
+  height: 35px;
+}
