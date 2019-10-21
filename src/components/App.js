@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateNewDictionary from './CreateNewDictionary';
 import Dictionaries from './Dictionaries';
+import '../App.css';
 
 class App extends Component {
   constructor(props) {
@@ -180,20 +181,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <h1>Dictionary Management Application</h1>
-          <CreateNewDictionary
-            newDictionaryName={this.state.newDictionaryName}
-            addDictionaryFn={this.addDictionary}
-          />
-          <Dictionaries
-            dictionaries={this.state.dictionaries}
-            deleteDictionaryFn={this.deleteDictionary}
-            addNewRowFn={this.addNewRow}
-            deleteRowFn={this.deleteRow}
-            editRowFn={this.editRow}
+        <h1>Dictionary Management Application</h1>
+        <CreateNewDictionary
+          newDictionaryName={this.state.newDictionaryName}
+          addDictionaryFn={this.addDictionary}
         />
-        </div>
+        <Dictionaries
+          dictionaries={this.state.dictionaries}
+          deleteDictionaryFn={this.deleteDictionary}
+          addNewRowFn={this.addNewRow}
+          deleteRowFn={this.deleteRow}
+          editRowFn={this.editRow}
+        />
       </div>
     );
   }

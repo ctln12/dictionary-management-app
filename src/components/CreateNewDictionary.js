@@ -20,7 +20,7 @@ class CreateNewDictionary extends Component {
   render() {
     return (
       <div className='Create-new-dictionary'>
-        <p>Create a new dictionary:</p>
+        <p>Create a new dictionary</p>
         <input
           type='text'
           placeholder='Name'

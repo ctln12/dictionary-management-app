@@ -11,6 +11,8 @@ class DictionaryContent extends Component {
             <tr>
               <th>Domain</th>
               <th>Range</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

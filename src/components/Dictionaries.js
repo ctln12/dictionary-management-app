@@ -5,7 +5,7 @@ class Dictionaries extends Component {
   render() {
     const { dictionaries } = this.props;
     return (
-      <div className='Create-new-dictionary'>
+      <div className='Dictionaries'>
         <h2>Dictionaries</h2>
         {
           dictionaries.map(dictionary => {

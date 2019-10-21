@@ -49,7 +49,6 @@ class AddNewRow extends Component {
     const { dictionary } = this.props;
     return (
       <div id={dictionary.name} className='NewEntry'>
-        <p>Add new entry:</p>
         <input
           type='text'
           placeholder='newDomain'
@@ -67,7 +66,7 @@ class AddNewRow extends Component {
         <button
           onClick={(e) => this.addNewRow(e)}
         >
-          add new content
+          add
         </button>
       </div>
     );

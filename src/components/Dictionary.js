@@ -13,19 +13,17 @@ class Dictionary extends Component {
       <div key={dictionary.id} className='Dictionary'>
         <h3>
           {dictionary.name}
-          <button onClick={(e) => this.deleteDictionary(e)}>
-            x
-          </button>
+            <i class="far fa-times-circle fa-fw" onClick={(e) => this.deleteDictionary(e)}></i>
         </h3>
-        <AddNewRow
-          dictionaries={dictionaries}
-          dictionary={dictionary}
-          addNewRowFn={this.props.addNewRowFn}
-        />
         <DictionaryContent
           dictionary={dictionary}
           deleteRowFn={this.props.deleteRowFn}
           editRowFn={this.props.editRowFn}
+        />
+        <AddNewRow
+          dictionaries={dictionaries}
+          dictionary={dictionary}
+          addNewRowFn={this.props.addNewRowFn}
         />
       </div>
     );
