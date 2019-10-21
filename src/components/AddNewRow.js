@@ -27,7 +27,6 @@ class AddNewRow extends Component {
     const { dictionary } = this.props;
     return (
       <div id={dictionary.name} className='NewEntry'>
-        Hello from AddNewRow component
         <p>Add new entry:</p>
         <input
           type='text'

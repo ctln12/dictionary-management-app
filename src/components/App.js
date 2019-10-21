@@ -181,13 +181,13 @@ class App extends Component {
   }
 
   deleteRow = async (dictionary, rowId) => {
+    console.log(rowId, 'deleted from ', dictionary.name);
     // copy current list of dictionaries
     const content = dictionary.content;
-    console.log(content);
+
     // filter out item being deleted
     const updatedContent = content.filter(row => row.id !== rowId);
     console.log(updatedContent);
-    // console.log(dictionary);
     dictionary.content = updatedContent;
 
     await this.setState({ dictionaries: this.state.dictionaries});
@@ -225,8 +225,9 @@ class App extends Component {
             dictionaries={this.state.dictionaries}
             deleteDictionaryFn={this.deleteDictionary}
             addNewRowFn={this.addNewRow}
-          />
-          <div className='Dictionaries'>
+            deleteRowFn={this.deleteRow}
+        />
+          {/* <div className='Dictionaries'>
             {this.state.dictionaries.map(dictionary => {
               return (
                 <div key={dictionary.id} className='Dictionary'>
@@ -291,7 +292,7 @@ class App extends Component {
                 </div>
               )
             })}
-          </div>
+          </div> */}
         </div>
       </div>
     );

@@ -27,11 +27,9 @@ class CreateNewDictionary extends Component {
           name='name'
           value={this.state.newDictionaryName}
           onChange={e => this.updateDictionary(e)}
-          // onChange={e => this.props.updateDictionary('newDictionaryName', e.target.value)}
         />
         <button
           onClick={(e) => this.addDictionary(e)}
-          // onClick={() => this.addDictionary()}
         >
           add
             </button>
