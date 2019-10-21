@@ -11,41 +11,49 @@ class App extends Component {
       dictionaries: [],
     }
   }
-
-  componentDidMount = () => {
+  componentWillMount = () => {
+    // set initial state with some data
     const data = [
       {
         id: 1,
-        name: 'Cactus',
+        name: 'Color',
         content: [
           {
             id: 1,
-            domain: 'Opuntia',
-            range: 'round'
+            domain: 'Stonegrey',
+            range: 'Dark Grey'
           },
           {
             id: 2,
-            domain: 'Column',
-            range: 'long'
+            domain: 'Midnight Black',
+            range: 'Black'
           }
         ]
       },
       {
         id: 2,
-        name: 'Flowers',
+        name: 'Material',
         content: [
           {
             id: 1,
-            domain: 'Orchid',
-            range: 'white'
+            domain: 'Stainless Steele',
+            range: 'Chromium'
           }
         ]
       }
     ];
+    this.setState({ dictionaries: data });
+    console.log('Add data to localStorage');
+  }
+
+  componentDidMount = () => {
+    // verify if stored data
     const dictionaries = localStorage.getItem('dictionaries');
+    console.log(localStorage.getItem('dictionaries'));
     if (dictionaries) {
       const savedDictionaries = JSON.parse(dictionaries);
       this.setState({ dictionaries: savedDictionaries });
+      console.log('Dictionaries availables');
     } else {
       console.log('No dictionaries');
     }
@@ -67,7 +75,6 @@ class App extends Component {
       id: 1 + dictionaries.length,
       name: this.state.newDictionaryName.slice(),
       content: []
-      // content: [{ id: 1 + Math.random(), domain: this.state.newDomain.slice(), range: this.state.newRange.slice()}]
     };
 
     //add new item to dictionaries
@@ -96,11 +103,37 @@ class App extends Component {
     console.log(localStorage.getItem('dictionaries'));
   }
 
-  updateInput(key, value) {
+  updateInput(key, value, name) {
     // update react state (if use of localStorage)
     this.setState({
       [key]: value
     })
+
+    const dictionaries = this.state.dictionaries;
+    dictionaries.forEach(dictionary => {
+      if (dictionary.name === name) {
+        dictionary.content.forEach(row => {
+          if (key === 'newDomain') {
+            if (value === row.domain) {
+              if (value !== row.range) {
+                alert('Duplicate / Fork!');
+                value = '';
+              }
+            }
+          } else {
+            if (key === 'newRange') {
+              if (!row.range.includes(value)) {
+                if (this.state.newDomain === row.range) {
+                  alert('Cycle / Chain!');
+                  value = '';
+                }
+              }
+            }
+          }
+          }
+        );
+      }
+    });
   }
 
   addNewRow = async (dictionary) => {
@@ -108,19 +141,18 @@ class App extends Component {
     const content = dictionary.content;
 
     // create item with unique id
-    const newContent = {
+    const newRow = {
       id: 1 + content.length,
       domain: this.state.newDomain.slice(),
       range: this.state.newRange.slice()
     };
 
     //add new item to dictionaries
-    dictionary.content.push(newContent);
+    content.push(newRow);
 
     //update state with new dictionaries and reset newDictionaryName input
     await this.setState({
       dictionaries: this.state.dictionaries,
-      // content,
       newDomain: '',
       newRange: ''
     });
@@ -200,14 +232,14 @@ class App extends Component {
                       placeholder='domain'
                       name={dictionary.name}
                       value={this.state.newDomain}
-                      onChange={e => this.updateInput('newDomain', e.target.value)}
+                      onChange={e => this.updateInput('newDomain', e.target.value, e.target.name)}
                     />
                     <input
                       type='text'
                       placeholder='range'
                       name={dictionary.name}
                       value={this.state.newRange}
-                      onChange={e => this.updateInput('newRange', e.target.value)}
+                      onChange={e => this.updateInput('newRange', e.target.value, e.target.name)}
                     />
                     <button onClick={() => this.addNewRow(dictionary)}>add new content</button>
                   </div>
