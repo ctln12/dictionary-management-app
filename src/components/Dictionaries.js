@@ -25,7 +25,11 @@ class Dictionaries extends Component {
         {
           dictionaries.map(dictionary => {
             return (
-              <Dictionary dictionary={dictionary} deleteDictionaryFn={this.props.deleteDictionaryFn}/>
+              <Dictionary
+                dictionary={dictionary}
+                deleteDictionaryFn={this.props.deleteDictionaryFn}
+                addNewRowFn={this.props.addNewRowFn}
+              />
             )
           })
         }

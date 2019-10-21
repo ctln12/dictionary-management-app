@@ -154,15 +154,16 @@ class App extends Component {
     });
   }
 
-  addNewRow = async (dictionary) => {
+  addNewRow = async (dictionary, newDomain, newRange) => {
+    console.log('new row added', dictionary);
     // copy of current list of dictionaries
     const content = dictionary.content;
 
     // create item with unique id
     const newRow = {
       id: this.setUniqueId(),
-      domain: this.state.newDomain.slice(),
-      range: this.state.newRange.slice()
+      domain: newDomain.slice(),
+      range: newRange.slice()
     };
 
     //add new item to dictionaries
@@ -171,8 +172,8 @@ class App extends Component {
     //update state with new dictionaries and reset newDictionaryName input
     await this.setState({
       dictionaries: this.state.dictionaries,
-      newDomain: '',
-      newRange: ''
+      // newDomain: '',
+      // newRange: ''
     });
 
     localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
@@ -223,6 +224,7 @@ class App extends Component {
           <Dictionaries
             dictionaries={this.state.dictionaries}
             deleteDictionaryFn={this.deleteDictionary}
+            addNewRowFn={this.addNewRow}
           />
           <div className='Dictionaries'>
             {this.state.dictionaries.map(dictionary => {
