@@ -16,10 +16,10 @@ class Row extends Component {
         <td>{row.domain}</td>
         <td>{row.range}</td>
         <td>
-          <i id={row.id} class="fas fa-trash-alt fa-fw" onClick={e => this.deleteRow(e)}></i>
+          <i id={row.id} className="fas fa-trash-alt fa-fw" onClick={e => this.deleteRow(e)}></i>
         </td>
         <td>
-          <i id={row.id} class="fas fa-pen fa-fw" onClick={e => this.editRow(e)}></i>
+          <i id={row.id} className="fas fa-pen fa-fw" onClick={e => this.editRow(e)}></i>
         </td>
       </tr>
     );

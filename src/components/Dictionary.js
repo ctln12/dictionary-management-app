@@ -13,7 +13,7 @@ class Dictionary extends Component {
       <div key={dictionary.id} className='Dictionary'>
         <h3>
           {dictionary.name}
-            <i class="far fa-times-circle fa-fw" onClick={(e) => this.deleteDictionary(e)}></i>
+            <i className="far fa-times-circle fa-fw" onClick={(e) => this.deleteDictionary(e)}></i>
         </h3>
         <DictionaryContent
           dictionary={dictionary}
