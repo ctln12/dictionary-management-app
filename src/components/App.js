@@ -214,20 +214,22 @@ class App extends Component {
       <div className="App">
         <div>
           <h1>App</h1>
-          <p>Create a new dictionary:</p>
-          <input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={this.state.newDictionaryName}
-            onChange={e => this.updateDictionary('newDictionaryName', e.target.value)}
-          />
-          <button
-          onClick={() => this.addDictionary()}
-          >
-            add
-          </button>
-          <hr/>
+          <div className='Create-new-dictionary'>
+            <p>Create a new dictionary:</p>
+            <input
+              type='text'
+              placeholder='Name'
+              name='name'
+              value={this.state.newDictionaryName}
+              onChange={e => this.updateDictionary('newDictionaryName', e.target.value)}
+            />
+            <button
+            onClick={() => this.addDictionary()}
+            >
+              add
+            </button>
+            <hr/>
+          </div>
           <div className='Dictionaries'>
             <h2>Dictionaries</h2>
             {this.state.dictionaries.map(dictionary => {
