@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CreateNewDictionary from './CreateNewDictionary';
+import Dictionaries from './Dictionaries';
 
 class App extends Component {
   constructor(props) {
@@ -219,8 +220,8 @@ class App extends Component {
             newDictionaryName={this.state.newDictionaryName}
             addDictionaryFn={this.addDictionary}
           />
+          <Dictionaries dictionaries={this.state.dictionaries} />
           <div className='Dictionaries'>
-            <h2>Dictionaries</h2>
             {this.state.dictionaries.map(dictionary => {
               return (
                 <div key={dictionary.id} className='Dictionary'>
