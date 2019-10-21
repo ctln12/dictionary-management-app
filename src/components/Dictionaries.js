@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dictionary from './Dictionary';
 
 class Dictionaries extends Component {
   // constructor() {
@@ -21,36 +22,13 @@ class Dictionaries extends Component {
     return (
       <div className='Create-new-dictionary'>
         <h2>Dictionaries</h2>
-        {dictionaries.map(dictionary => {
-          return (
-            <div key={dictionary.id} className='Dictionary'>
-              <h3>
-                {dictionary.name}
-                <button
-                  // onClick={() => this.deleteDictionary(dictionary.id)}
-                >
-                  x
-                </button>
-              </h3>
-            </div>
-          )})}
-
-        {/* <p>Create a new dictionary:</p>
-        <input
-          type='text'
-          placeholder='Name'
-          name='name'
-          value={this.state.newDictionaryName}
-          onChange={e => this.updateDictionary(e)}
-        // onChange={e => this.props.updateDictionary('newDictionaryName', e.target.value)}
-        />
-        <button
-          onClick={(e) => this.addDictionary(e)}
-        // onClick={() => this.addDictionary()}
-        >
-          add
-            </button>
-        <hr /> */}
+        {
+          dictionaries.map(dictionary => {
+            return (
+              <Dictionary dictionary={dictionary} deleteDictionaryFn={this.props.deleteDictionaryFn}/>
+            )
+          })
+        }
       </div>
     );
   }

@@ -220,7 +220,10 @@ class App extends Component {
             newDictionaryName={this.state.newDictionaryName}
             addDictionaryFn={this.addDictionary}
           />
-          <Dictionaries dictionaries={this.state.dictionaries} />
+          <Dictionaries
+            dictionaries={this.state.dictionaries}
+            deleteDictionaryFn={this.deleteDictionary}
+          />
           <div className='Dictionaries'>
             {this.state.dictionaries.map(dictionary => {
               return (
