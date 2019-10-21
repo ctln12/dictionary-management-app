@@ -11,10 +11,12 @@ class Dictionaries extends Component {
           dictionaries.map(dictionary => {
             return (
               <Dictionary
+                dictionaries={dictionaries}
                 dictionary={dictionary}
                 deleteDictionaryFn={this.props.deleteDictionaryFn}
                 addNewRowFn={this.props.addNewRowFn}
                 deleteRowFn={this.props.deleteRowFn}
+                editRowFn={this.props.editRowFn}
               />
             )
           })

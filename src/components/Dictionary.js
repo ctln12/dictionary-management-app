@@ -8,7 +8,7 @@ class Dictionary extends Component {
   }
 
   render() {
-    const { dictionary } = this.props;
+    const { dictionaries, dictionary } = this.props;
     return (
       <div key={dictionary.id} className='Dictionary'>
         <h3>
@@ -18,12 +18,14 @@ class Dictionary extends Component {
           </button>
         </h3>
         <AddNewRow
+          dictionaries={dictionaries}
           dictionary={dictionary}
           addNewRowFn={this.props.addNewRowFn}
         />
         <DictionaryContent
           dictionary={dictionary}
           deleteRowFn={this.props.deleteRowFn}
+          editRowFn={this.props.editRowFn}
         />
       </div>
     );

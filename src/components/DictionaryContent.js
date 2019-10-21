@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import Row from './Row';
 
 class DictionaryContent extends Component {
-  deleteRow = (e) => {
-    this.props.deleteRowFn(this.props.dictionary, parseInt(e.target.id));
-    console.log('deleted');
-  }
-
   render() {
     const { dictionary } = this.props;
     return (
       <div className='DictionaryContent'>
-        Hello from the DictionaryContent component!
-        <table>
+        <table className={dictionary.name}>
           <thead>
             <tr>
               <th>Domain</th>
@@ -20,12 +15,12 @@ class DictionaryContent extends Component {
           </thead>
           <tbody>
             {dictionary.content.map(row => (
-              <tr>
-                <td>{row.domain}</td>
-                <td>{row.range}</td>
-                <td><button id={row.id} onClick={e => this.deleteRow(e)}>x</button></td>
-                <td><button>edit</button></td>
-              </tr>
+              <Row
+                dictionary={dictionary}
+                row={row}
+                deleteRowFn={this.props.deleteRowFn}
+                editRowFn={this.props.editRowFn}
+              />
             ))}
           </tbody>
         </table>

@@ -76,7 +76,7 @@ class App extends Component {
     return newId;
   };
 
-  updateDictionary(key, value) {
+  updateInput(key, value) {
     // update react state (if use of localStorage)
     this.setState({
       [key]: value
@@ -121,41 +121,40 @@ class App extends Component {
     console.log(localStorage.getItem('dictionaries'));
   }
 
-  updateInput(key, value, name) {
-    // update react state (if use of localStorage)
-    this.setState({
-      [key]: value
-    })
+  // updateInput(key, value, name) {
+  //   // update react state (if use of localStorage)
+  //   this.setState({
+  //     [key]: value
+  //   })
 
-    const dictionaries = this.state.dictionaries;
-    dictionaries.forEach(dictionary => {
-      if (dictionary.name === name) {
-        dictionary.content.forEach(row => {
-          if (key === 'newDomain') {
-            if (value === row.domain) {
-              if (value !== row.range) {
-                alert('Duplicate / Fork!');
-                value = '';
-              }
-            }
-          } else {
-            if (key === 'newRange') {
-              if (!row.range.includes(value)) {
-                if (this.state.newDomain === row.range) {
-                  alert('Cycle / Chain!');
-                  value = '';
-                }
-              }
-            }
-          }
-          }
-        );
-      }
-    });
-  }
+  //   const dictionaries = this.state.dictionaries;
+  //   dictionaries.forEach(dictionary => {
+  //     if (dictionary.name === name) {
+  //       dictionary.content.forEach(row => {
+  //         if (key === 'newDomain') {
+  //           if (value === row.domain) {
+  //             if (value !== row.range) {
+  //               alert('Duplicate / Fork!');
+  //               value = '';
+  //             }
+  //           }
+  //         } else {
+  //           if (key === 'newRange') {
+  //             if (!row.range.includes(value)) {
+  //               if (this.state.newDomain === row.range) {
+  //                 alert('Cycle / Chain!');
+  //                 value = '';
+  //               }
+  //             }
+  //           }
+  //         }
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
 
-  addNewRow = async (dictionary, newDomain, newRange) => {
-    console.log('new row added', dictionary);
+  addNewRow = (dictionary, newDomain, newRange) => {
     // copy of current list of dictionaries
     const content = dictionary.content;
 
@@ -170,17 +169,17 @@ class App extends Component {
     content.push(newRow);
 
     //update state with new dictionaries and reset newDictionaryName input
-    await this.setState({
+    this.setState({
       dictionaries: this.state.dictionaries,
-      // newDomain: '',
-      // newRange: ''
+      newDomain: '',
+      newRange: ''
     });
-
+    console.log(this.state.newDomain, this.state.newRange);
     localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
     console.log(localStorage.getItem('dictionaries'));
   }
 
-  deleteRow = async (dictionary, rowId) => {
+  deleteRow = (dictionary, rowId) => {
     console.log(rowId, 'deleted from ', dictionary.name);
     // copy current list of dictionaries
     const content = dictionary.content;
@@ -190,7 +189,7 @@ class App extends Component {
     console.log(updatedContent);
     dictionary.content = updatedContent;
 
-    await this.setState({ dictionaries: this.state.dictionaries});
+    this.setState({ dictionaries: this.state.dictionaries});
 
     localStorage.setItem('dictionaries', JSON.stringify(this.state.dictionaries));
     console.log(localStorage.getItem('dictionaries'));
@@ -226,73 +225,8 @@ class App extends Component {
             deleteDictionaryFn={this.deleteDictionary}
             addNewRowFn={this.addNewRow}
             deleteRowFn={this.deleteRow}
+            editRowFn={this.editRow}
         />
-          {/* <div className='Dictionaries'>
-            {this.state.dictionaries.map(dictionary => {
-              return (
-                <div key={dictionary.id} className='Dictionary'>
-                  <h3 key={dictionary.id}>
-                    {dictionary.name}
-                    <button
-                      onClick={() => this.deleteDictionary(dictionary.id)}
-                    >
-                      x
-                    </button>
-                  </h3>
-                  <div id={dictionary.name} className='NewEntry'>
-                    <p>Add new entry:</p>
-                    <input
-                      type='text'
-                      placeholder='domain'
-                      name={dictionary.name}
-                      value={this.state.newDomain}
-                      onChange={e => this.updateInput('newDomain', e.target.value, e.target.name)}
-                    />
-                    <input
-                      type='text'
-                      placeholder='range'
-                      name={dictionary.name}
-                      value={this.state.newRange}
-                      onChange={e => this.updateInput('newRange', e.target.value, e.target.name)}
-                    />
-                    <button onClick={() => this.addNewRow(dictionary)}>add new content</button>
-                  </div>
-                  <table className={dictionary.name}>
-                    <thead>
-                      <tr>
-                        <th>Domain</th>
-                        <th>Range</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {dictionary.content.map(row => {
-                        return (
-                          <tr key={row.id} id={row.id}>
-                            <td>{row.domain}</td>
-                            <td>{row.range}</td>
-                            <td>
-                              <button
-                                onClick={() => this.deleteRow(dictionary, row.id)}
-                              >
-                                x
-                              </button>
-                            </td>
-                            <td>
-                              <button
-                                onClick={() => this.editRow(dictionary, row.id)}
-                              >
-                                edit
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              )
-            })}
-          </div> */}
         </div>
       </div>
     );
