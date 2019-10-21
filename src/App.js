@@ -11,6 +11,7 @@ class App extends Component {
       dictionaries: [],
     }
   }
+
   componentWillMount = () => {
     // set initial state with some data
     const data = [
@@ -43,13 +44,12 @@ class App extends Component {
       }
     ];
     this.setState({ dictionaries: data });
-    console.log('Add data to localStorage');
+    console.log('Add data to state');
   }
 
   componentDidMount = () => {
     // verify if stored data
     const dictionaries = localStorage.getItem('dictionaries');
-    console.log(localStorage.getItem('dictionaries'));
     if (dictionaries) {
       const savedDictionaries = JSON.parse(dictionaries);
       this.setState({ dictionaries: savedDictionaries });
